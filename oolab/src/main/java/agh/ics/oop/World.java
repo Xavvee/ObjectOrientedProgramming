@@ -2,21 +2,22 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
+import static agh.ics.oop.OptionsParser.OptionsParser;
+
 public class World {
     public static void main(String[] args){
         System.out.println("System wystartował.");
-        MoveDirection[] directions = new OptionsParser(args);
-        run(args);
+        run(OptionsParser(args));
         System.out.println("System zakończył działanie.");
     }
 
-    static void run(String[] args){
-        for (String arg : args) {
-            switch (arg){
-                case "f" -> System.out.println("Zwierzak idzie do przodu.");
-                case "b" -> System.out.println("Zwierzak idzie do tyłu.");
-                case "r" -> System.out.println("Zwierzak skręca w prawo.");
-                case "l" -> System.out.println("Zwierzak skręca w lewo.");
+    static void run(MoveDirection[] directions){
+        for (MoveDirection dir : directions) {
+            switch (dir){
+                case FORWARD -> System.out.println("Zwierzak idzie do przodu.");
+                case BACKWARD -> System.out.println("Zwierzak idzie do tyłu.");
+                case RIGHT -> System.out.println("Zwierzak skręca w prawo.");
+                case LEFT -> System.out.println("Zwierzak skręca w lewo.");
                 default -> {
                 }
             }

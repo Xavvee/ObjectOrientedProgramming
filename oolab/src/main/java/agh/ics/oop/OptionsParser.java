@@ -14,21 +14,19 @@ public class OptionsParser {
                 counter++;
             }
         }
-        String[] corrected = new String[counter];
         MoveDirection[] converted = new MoveDirection[counter];
         int index=0;
         for (String direction : directions) {
             switch (direction){
-                case "f" -> {converted[index] = FORWARD; index++};
-                case "f" -> {converted[index] = FORWARD; index++}
-                case "f" -> {converted[index] = FORWARD; index++}
-                case "f" -> {converted[index] = FORWARD; index++}
+                case "f" -> {converted[index] = FORWARD; index++;}
+                case "b" -> {converted[index] = BACKWARD; index++;}
+                case "r" -> {converted[index] = RIGHT; index++;}
+                case "l" -> {converted[index] = LEFT; index++;}
                 default -> {}
             }
         }
 
-
-
         return converted;
     }
 }
+
