@@ -10,7 +10,7 @@ public class OptionsParser {
     public static MoveDirection[] OptionsParser(String[] directions){
         int counter=0;
         for (String direction : directions) {
-            if (Objects.equals(direction, "f") || direction == "r" || direction == "b" || direction == "l") {
+            if (Objects.equals(direction, "f") || Objects.equals(direction, "r") || Objects.equals(direction, "b") || Objects.equals(direction, "l")) {
                 counter++;
             }
         }

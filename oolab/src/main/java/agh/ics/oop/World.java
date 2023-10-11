@@ -7,7 +7,8 @@ import static agh.ics.oop.OptionsParser.OptionsParser;
 public class World {
     public static void main(String[] args){
         System.out.println("System wystartował.");
-        run(OptionsParser(args));
+        MoveDirection[] dirs = OptionsParser(args);
+        run(dirs);
         System.out.println("System zakończył działanie.");
     }
 
