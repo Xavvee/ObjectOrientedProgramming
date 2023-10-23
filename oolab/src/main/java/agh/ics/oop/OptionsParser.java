@@ -7,7 +7,7 @@ import java.util.Objects;
 import static agh.ics.oop.model.MoveDirection.*;
 
 public class OptionsParser {
-    public static MoveDirection[] OptionsParser(String[] directions){
+    public static MoveDirection[] parser(String[] directions){
         int counter=0;
         for (String direction : directions) {
             if (Objects.equals(direction, "f") || Objects.equals(direction, "r") || Objects.equals(direction, "b") || Objects.equals(direction, "l")) {

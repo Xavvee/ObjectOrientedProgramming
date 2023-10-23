@@ -2,8 +2,6 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
-import static agh.ics.oop.OptionsParser.OptionsParser;
-
 public class World {
     public static void main(String[] args){
         Vector2d position1 = new Vector2d(1,2);
@@ -12,7 +10,7 @@ public class World {
         System.out.println(position2);
         System.out.println(position1.add(position2));
         MapDirection direction =  MapDirection.EAST;
-        System.out.println(direction.toString());
+        System.out.println(direction);
         System.out.println(direction.next());
         System.out.println(direction.previous());
         System.out.println(direction.toUnitVector());
