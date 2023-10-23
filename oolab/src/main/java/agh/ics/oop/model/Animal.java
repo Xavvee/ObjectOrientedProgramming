@@ -23,4 +23,20 @@ public class Animal {
         return this.position.equals(position);
     }
 
+    void move(MoveDirection direction){
+        return switch (direction){
+
+            case FORWARD -> {
+                if(this.position.add(this.direction.toUnitVector()).precedes(new Vector2d(0,0)) || ){
+
+                }
+            };
+            case BACKWARD -> {
+
+            };
+            case RIGHT -> this.direction.next();
+            case LEFT -> this.direction.previous();
+        }
+    }
+
 }
