@@ -5,13 +5,24 @@ import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
+import static agh.ics.oop.OptionsParser.parser;
+
 public class World {
     public static void main(String[] args){
         Animal animal = new Animal();
         System.out.println(animal);
-        Animal animal1 = new Animal(new Vector2d(3,5));
-        System.out.println(animal1);
-        System.out.println(animal1.isAt(new Vector2d(3,5)));
+//        Animal animal1 = new Animal(new Vector2d(3,5));
+//        System.out.println(animal1);
+//        System.out.println(animal1.isAt(new Vector2d(3,5)));
+//        animal.move(MoveDirection.LEFT);
+//        System.out.println(animal);
+//        animal.move(MoveDirection.BACKWARD);
+//        System.out.println(animal);
+//        animal.move(MoveDirection.BACKWARD);
+//        System.out.println(animal);
+        System.out.println(parser(args));
+
+
     }
 
     static void run(MoveDirection[] directions){
