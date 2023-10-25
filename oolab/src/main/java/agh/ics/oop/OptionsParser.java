@@ -2,15 +2,13 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import static agh.ics.oop.model.MoveDirection.*;
 
 public class OptionsParser {
-    public static List<MoveDirection> parser(String[] directions){
+    public static List<MoveDirection> parse(String[] directions){
         List<MoveDirection> directionList = new LinkedList<>();
 //        for (String direction : directions) {
 //            if (Objects.equals(direction, "f") || Objects.equals(direction, "r") || Objects.equals(direction, "b") || Objects.equals(direction, "l")) {
