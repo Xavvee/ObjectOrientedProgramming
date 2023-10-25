@@ -13,8 +13,8 @@ public class Simulation {
 
 
 
-    private List<MoveDirection> moveDirections;
-    private List<Animal> animals;
+    private final List<MoveDirection> moveDirections;
+    private final List<Animal> animals;
 
     public Simulation(List<Vector2d> startingPositions, List<MoveDirection> moveDirections){
         this.moveDirections = moveDirections;
@@ -25,7 +25,7 @@ public class Simulation {
         this.animals = animalsCreate;
     }
 
-    void run(){
+    public void run(){
         int numberOfAnimals = animals.size();
         int iter = 0;
         for( MoveDirection direction : moveDirections){
@@ -36,5 +36,7 @@ public class Simulation {
         }
     }
 
-
+    public List<Animal> getAnimals() {
+        return animals;
+    }
 }
