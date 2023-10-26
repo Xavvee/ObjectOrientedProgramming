@@ -40,4 +40,7 @@ public class Animal {
         }
     }
 
+    public MapDirection getDirection() {
+        return this.direction;
+    }
 }

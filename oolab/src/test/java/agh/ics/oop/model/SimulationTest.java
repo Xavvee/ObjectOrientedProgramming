@@ -3,23 +3,37 @@ package agh.ics.oop.model;
 import agh.ics.oop.Simulation;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static agh.ics.oop.OptionsParser.parse;
+import static agh.ics.oop.model.MoveDirection.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SimulationTest {
     @Test
     public void testSimulation(){
         //given
-        String[] args = {"f","l","r","f","g","f","p","f","r","t","f","f","t","f","f","t","f","f","t","l","l","f","f","b"};
+        String[] args = {"f","l","r","f","g","f","p","f","r","t","f","f","t","f","f","t","f","f","t","l","l","l","f","l"};
+        MoveDirection[] moveArray = {FORWARD,LEFT,RIGHT,FORWARD,FORWARD,FORWARD,RIGHT,FORWARD,FORWARD,FORWARD,FORWARD,FORWARD,FORWARD,LEFT,LEFT,LEFT,FORWARD,LEFT};
+        List<MoveDirection> result = Arrays.asList(moveArray);
+
         List<MoveDirection> directions = parse(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4), new Vector2d(0,0));
         Simulation simulation = new Simulation(positions, directions);
         //when
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
-        //then
+        List<MoveDirection> correctDirections = simulation.getMoveDirections();
 
+        //then
+        assertEquals(result, correctDirections);
+        assertTrue(animals.get(0).isAt(new Vector2d(4,4)));
+        assertTrue(animals.get(1).isAt(new Vector2d(0,3)));
+        assertTrue(animals.get(2).isAt(new Vector2d(3,0)));
+        assertEquals(animals.get(0).getDirection(),MapDirection.NORTH);
+        assertEquals(animals.get(1).getDirection(),MapDirection.SOUTH);
+        assertEquals(animals.get(2).getDirection(),MapDirection.WEST);
     }
 }

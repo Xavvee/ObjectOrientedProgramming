@@ -37,6 +37,10 @@ public class Simulation {
     }
 
     public List<Animal> getAnimals() {
-        return animals;
+        return this.animals;
+    }
+
+    public List<MoveDirection> getMoveDirections() {
+        return this.moveDirections;
     }
 }
