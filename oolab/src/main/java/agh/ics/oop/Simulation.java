@@ -7,8 +7,6 @@ import agh.ics.oop.model.Vector2d;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.nio.file.Files.move;
-
 public class Simulation {
 
 
