@@ -43,4 +43,5 @@ public enum MapDirection {
         }
         return null;
     }
+
 }

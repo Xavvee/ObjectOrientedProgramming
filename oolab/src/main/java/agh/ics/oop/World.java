@@ -1,24 +1,18 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
+import java.util.List;
+
+import static agh.ics.oop.OptionsParser.parse;
+
 public class World {
     public static void main(String[] args){
-        Vector2d position1 = new Vector2d(1,2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        System.out.println(position2);
-
-        int cord1X = position1.getX();
-        System.out.println(cord1X);
-        System.out.println(position1.add(position2));
-        MapDirection direction =  MapDirection.EAST;
-        System.out.println(direction);
-        System.out.println(direction.next());
-        System.out.println(direction.previous());
-        System.out.println(direction.toUnitVector());
+        List<MoveDirection> directions = parse(args);
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+        Simulation simulation = new Simulation(positions, directions);
+        simulation.run();
     }
 
     static void run(MoveDirection[] directions){
