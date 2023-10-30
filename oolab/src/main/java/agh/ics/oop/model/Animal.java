@@ -2,6 +2,8 @@ package agh.ics.oop.model;
 
 public class Animal {
 
+    private final Vector2d lowerBound = new Vector2d(0,0);
+    private final Vector2d upperBound = new Vector2d(4,4);
     private MapDirection direction;
 
     private Vector2d position;
@@ -26,12 +28,12 @@ public class Animal {
     public void move(MoveDirection direction){
         switch (direction) {
             case FORWARD -> {
-                if ((position.add(this.direction.toUnitVector()).precedes(new Vector2d(4, 4))) && (new Vector2d(0, 0).precedes(position.add(this.direction.toUnitVector())))) {
+                if (canMoveForward()) {
                     this.position = this.position.add(this.direction.toUnitVector());
                 }
             }
             case BACKWARD -> {
-                if ((position.subtract(this.direction.toUnitVector()).precedes(new Vector2d(4, 4))) && (new Vector2d(0, 0).precedes(position.subtract(this.direction.toUnitVector())))) {
+                if (canMoveBackward()) {
                     this.position = this.position.subtract(this.direction.toUnitVector());
                 }
             }
@@ -40,6 +42,13 @@ public class Animal {
         }
     }
 
+    private boolean canMoveForward(){
+        return position.add(this.direction.toUnitVector()).precedes(upperBound) && (lowerBound.precedes(position.add(this.direction.toUnitVector())));
+    }
+
+    private boolean canMoveBackward(){
+        return position.subtract(this.direction.toUnitVector()).precedes(upperBound) && lowerBound.precedes(position.subtract(this.direction.toUnitVector()));
+    }
     public MapDirection getDirection() {
         return this.direction;
     }
