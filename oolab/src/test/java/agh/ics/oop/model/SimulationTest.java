@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SimulationTest {
     @Test
-    public void testSimulation(){
+    public void testSimulationThreeAnimals(){
         //given
         String[] args = {"f","l","r","f","g","f","p","f","r","t","f","f","t","f","f","t","f","f","t","l","l","l","f","l"};
         MoveDirection[] moveArray = {FORWARD,LEFT,RIGHT,FORWARD,FORWARD,FORWARD,RIGHT,FORWARD,FORWARD,FORWARD,FORWARD,FORWARD,FORWARD,LEFT,LEFT,LEFT,FORWARD,LEFT};
@@ -35,5 +35,22 @@ public class SimulationTest {
         assertEquals(animals.get(0).getDirection(),MapDirection.NORTH);
         assertEquals(animals.get(1).getDirection(),MapDirection.SOUTH);
         assertEquals(animals.get(2).getDirection(),MapDirection.WEST);
+    }
+
+    @Test
+    public void testSimulationTwoAnimals(){
+        //given
+        MoveDirection[] moveArray = {FORWARD,RIGHT,LEFT,FORWARD,FORWARD,FORWARD,RIGHT,FORWARD,FORWARD,FORWARD,FORWARD,LEFT,FORWARD,LEFT,LEFT,LEFT,FORWARD};
+        List<MoveDirection> directions = Arrays.asList(moveArray);
+        List<Vector2d> positions = List.of(new Vector2d(4,1), new Vector2d(0,3));
+        Simulation simulation = new Simulation(positions, directions);
+        //when
+        simulation.run();
+        List<Animal> animals = simulation.getAnimals();
+        //then
+        assertTrue(animals.get(0).isAt(new Vector2d(2,4)));
+        assertTrue(animals.get(1).isAt(new Vector2d(4,3)));
+        assertEquals(animals.get(0).getDirection(),MapDirection.WEST);
+        assertEquals(animals.get(1).getDirection(),MapDirection.SOUTH);
     }
 }
