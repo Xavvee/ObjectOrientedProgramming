@@ -57,4 +57,8 @@ public class Animal {
     public MapDirection getDirection() {
         return this.direction;
     }
+
+    public Vector2d getPosition() {
+        return position;
+    }
 }
