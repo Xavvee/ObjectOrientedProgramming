@@ -5,22 +5,24 @@ import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Simulation {
 
 
 
     private final List<MoveDirection> moveDirections;
-    private final List<Animal> animals;
+    private final Map<Vector2d, Animal> animals;
 
     public Simulation(List<Vector2d> startingPositions, List<MoveDirection> moveDirections){
         this.moveDirections = moveDirections;
-        List<Animal> animalsCreate = new ArrayList<>();
+        Map<Vector2d, Animal> animals = new HashMap<>();
         for(Vector2d position : startingPositions){
-            animalsCreate.add(new Animal(position));
+            animals.put(position, new Animal(position));
         }
-        this.animals = animalsCreate;
+        this.animals = animals;
     }
 
     public void run(){
@@ -34,7 +36,7 @@ public class Simulation {
         }
     }
 
-    public List<Animal> getAnimals() {
+    public Map<Vector2d, Animal> getAnimals() {
         return this.animals;
     }
 

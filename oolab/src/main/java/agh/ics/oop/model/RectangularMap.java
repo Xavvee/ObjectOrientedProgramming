@@ -7,22 +7,21 @@ public class RectangularMap implements WorldMap {
     private final int height;
     private final int width;
 
-    private Map<Vector2d, Animal> animals;
-
     public RectangularMap(int height, int width){
         this.height = height;
         this.width = width;
-        this.animals = new HashMap<>();
     }
 
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return false;
+        Vector2d upperRightCorner = new Vector2d(width, height);
+        return position.follows(upperRightCorner) && (new Vector2d(0,0)).precedes(position);
     }
 
     @Override
     public boolean place(Animal animal) {
+        if()
         return false;
     }
 
@@ -38,6 +37,9 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public Animal objectAt(Vector2d position) {
+        if(this.isOccupied(position)){
+            return animals.get(position);
+        }
         return null;
     }
 }

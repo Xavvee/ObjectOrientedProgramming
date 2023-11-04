@@ -18,7 +18,12 @@ public class Animal {
 
     @Override
     public String toString(){
-        return this.position + ", " + this.direction;
+        return switch (direction){
+            case NORTH -> "^";
+            case WEST -> "<";
+            case SOUTH -> "v";
+            case EAST -> ">";
+        };
     }
 
     public boolean isAt(Vector2d position){
