@@ -30,16 +30,18 @@ public class Animal {
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction){
+    public void move(MoveDirection direction, MoveValidator validator){
         switch (direction) {
             case FORWARD -> {
-                if (canMoveForward()) {
-                    this.position = this.position.add(this.direction.toUnitVector());
+                Vector2d newPosition = position.add(this.direction.toUnitVector());
+                if(validator.canMoveTo(newPosition)){
+                    this.position = newPosition;
                 }
             }
             case BACKWARD -> {
-                if (canMoveBackward()) {
-                    this.position = this.position.subtract(this.direction.toUnitVector());
+                Vector2d newPosition = position.subtract(this.direction.toUnitVector());
+                if(validator.canMoveTo(newPosition)){
+                    this.position = newPosition;
                 }
             }
             case RIGHT -> this.direction = this.direction.next();
@@ -47,13 +49,6 @@ public class Animal {
         }
     }
 
-    private boolean canMoveForward(){
-        return position.add(this.direction.toUnitVector()).precedes(upperBound) && (lowerBound.precedes(position.add(this.direction.toUnitVector())));
-    }
-
-    private boolean canMoveBackward(){
-        return position.subtract(this.direction.toUnitVector()).precedes(upperBound) && lowerBound.precedes(position.subtract(this.direction.toUnitVector()));
-    }
     public MapDirection getDirection() {
         return this.direction;
     }
