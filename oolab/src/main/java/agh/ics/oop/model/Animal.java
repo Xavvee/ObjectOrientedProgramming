@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Animal {
 
     private final Vector2d lowerBound = new Vector2d(0,0);
@@ -18,23 +20,30 @@ public class Animal {
 
     @Override
     public String toString(){
-        return this.position + ", " + this.direction;
+        return switch (direction){
+            case NORTH -> "^";
+            case WEST -> "<";
+            case SOUTH -> "v";
+            case EAST -> ">";
+        };
     }
 
     public boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction){
+    public void move(MoveDirection direction, MoveValidator validator){
         switch (direction) {
             case FORWARD -> {
-                if (canMoveForward()) {
-                    this.position = this.position.add(this.direction.toUnitVector());
+                Vector2d newPosition = position.add(this.direction.toUnitVector());
+                if(validator.canMoveTo(newPosition)){
+                    this.position = newPosition;
                 }
             }
             case BACKWARD -> {
-                if (canMoveBackward()) {
-                    this.position = this.position.subtract(this.direction.toUnitVector());
+                Vector2d newPosition = position.subtract(this.direction.toUnitVector());
+                if(validator.canMoveTo(newPosition)){
+                    this.position = newPosition;
                 }
             }
             case RIGHT -> this.direction = this.direction.next();
@@ -42,14 +51,12 @@ public class Animal {
         }
     }
 
-    private boolean canMoveForward(){
-        return position.add(this.direction.toUnitVector()).precedes(upperBound) && (lowerBound.precedes(position.add(this.direction.toUnitVector())));
-    }
-
-    private boolean canMoveBackward(){
-        return position.subtract(this.direction.toUnitVector()).precedes(upperBound) && lowerBound.precedes(position.subtract(this.direction.toUnitVector()));
-    }
     public MapDirection getDirection() {
         return this.direction;
     }
+
+    public Vector2d getPosition() {
+        return position;
+    }
+
 }
