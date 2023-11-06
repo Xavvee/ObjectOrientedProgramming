@@ -16,7 +16,7 @@ public class Simulation {
 
     private final List<MoveDirection> moveDirections;
     private final List<Animal> animals;
-    private WorldMap map;
+    private final WorldMap map;
 
     public Simulation(List<Vector2d> startingPositions, List<MoveDirection> moveDirections, WorldMap map){
         this.moveDirections = moveDirections;
@@ -24,8 +24,10 @@ public class Simulation {
         List<Animal> animals = new ArrayList<>();
         for(Vector2d position : startingPositions){
             Animal animal = new Animal(position);
-            animals.add(animal);
-            map.place(animal);
+            if(!animals.contains(animal)) {
+                animals.add(animal);
+                map.place(animal);
+            }
         }
         this.animals = animals;
     }

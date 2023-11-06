@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Animal {
 
     private final Vector2d lowerBound = new Vector2d(0,0);
@@ -55,5 +57,18 @@ public class Animal {
 
     public Vector2d getPosition() {
         return position;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal otherAnimal = (Animal) o;
+        return Objects.equals(position, otherAnimal.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 }
