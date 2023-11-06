@@ -34,7 +34,7 @@ public class RectangularMapTest {
         //given
         MoveDirection[] moveArray = {RIGHT,RIGHT,BACKWARD,FORWARD,FORWARD,BACKWARD,FORWARD,LEFT,LEFT,LEFT,FORWARD,BACKWARD,FORWARD,FORWARD,LEFT,FORWARD,RIGHT};
         List<MoveDirection> directions = Arrays.asList(moveArray);
-        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,3), new Vector2d(2,7));
+        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,3), new Vector2d(2,7), new Vector2d(7,3));
         WorldMap map = new RectangularMap(7,2);
         Simulation simulation = new Simulation(positions, directions, map);
         //when
@@ -55,7 +55,7 @@ public class RectangularMapTest {
         //given
         MoveDirection[] moveArray = {FORWARD,RIGHT,LEFT,FORWARD,FORWARD, FORWARD,RIGHT,FORWARD,FORWARD,FORWARD, FORWARD,LEFT,FORWARD,LEFT,LEFT, LEFT,FORWARD,RIGHT,LEFT};
         List<MoveDirection> directions = Arrays.asList(moveArray);
-        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,3),new Vector2d(5,5),new Vector2d(4,3), new Vector2d(1,1));
+        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,3), new Vector2d(9,9), new Vector2d(5,5),new Vector2d(4,3), new Vector2d(1,1));
         WorldMap map = new RectangularMap(6,6);
         Simulation simulation = new Simulation(positions, directions, map);
         //when

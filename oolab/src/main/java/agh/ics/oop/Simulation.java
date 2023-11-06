@@ -24,9 +24,8 @@ public class Simulation {
         List<Animal> animals = new ArrayList<>();
         for(Vector2d position : startingPositions){
             Animal animal = new Animal(position);
-            if(!animals.contains(animal)) {
+            if(map.place(animal)) {
                 animals.add(animal);
-                map.place(animal);
             }
         }
         this.animals = animals;

@@ -59,16 +59,4 @@ public class Animal {
         return position;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Animal otherAnimal = (Animal) o;
-        return Objects.equals(position, otherAnimal.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
 }
