@@ -33,10 +33,8 @@ public class GrassField implements WorldMap {
     private boolean generateGrass(Random rand){
         Vector2d randomPosition = new Vector2d(rand.nextInt((int) Math.sqrt(numberOfGrasses*10)), rand.nextInt((int) Math.sqrt(numberOfGrasses*10)));
         if(this.isOccupied(randomPosition)){
-            System.out.println("Wylosowana pozycja już jest: " + randomPosition);
             return false;
         }
-        System.out.println("Nowa pozycja: " + randomPosition);
         grasses.put(randomPosition, new Grass(randomPosition));
         return true;
     }
