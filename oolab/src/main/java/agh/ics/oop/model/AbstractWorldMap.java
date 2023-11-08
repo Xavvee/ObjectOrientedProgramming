@@ -9,6 +9,8 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
     protected final MapVisualizer visualizer = new MapVisualizer(this);
 
+
+
     @Override
     public boolean canMoveTo(Vector2d position) {
         return position.precedes(this.getUpperRight()) && (this.getLowerLeft().precedes(position));
@@ -50,6 +52,12 @@ public abstract class AbstractWorldMap implements WorldMap {
     @Override
     public String toString(){
         return visualizer.draw(getLeftBound(),getRightBound());
+    }
+
+    @Override
+    public Map<Vector2d, WorldElement> getElements() {
+        Map<Vector2d, WorldElement> allElements = new HashMap<>(animals);
+        return allElements;
     }
 
     protected abstract Vector2d getLeftBound();

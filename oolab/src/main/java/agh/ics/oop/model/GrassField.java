@@ -89,4 +89,12 @@ public class GrassField extends AbstractWorldMap {
     protected Vector2d getLeftBound() {
         return calculateLowerLeft();
     }
+
+    @Override
+    public Map<Vector2d, WorldElement> getElements() {
+        Map<Vector2d, WorldElement> allElements = new HashMap<>();
+        allElements.putAll(super.getElements());
+        allElements.putAll(this.grasses);
+        return allElements;
+    }
 }

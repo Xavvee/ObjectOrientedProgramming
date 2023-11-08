@@ -39,8 +39,4 @@ public class RectangularMap extends AbstractWorldMap {
         return getUpperRight();
     }
 
-    @Override
-    public String toString(){
-        return visualizer.draw(this.getLowerLeft(), this.getUpperRight());
-    }
 }
