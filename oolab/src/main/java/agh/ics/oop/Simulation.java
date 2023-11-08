@@ -13,7 +13,6 @@ import java.util.Map;
 public class Simulation {
 
 
-
     private final List<MoveDirection> moveDirections;
     private final List<Animal> animals;
     private final WorldMap map;

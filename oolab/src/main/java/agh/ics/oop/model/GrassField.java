@@ -1,20 +1,17 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.MapVisualizer;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class GrassField implements WorldMap {
+public class GrassField extends AbstractWorldMap {
 
     private final int numberOfGrasses;
 
-    private final int height = Integer.MAX_VALUE;
-    private final int width = Integer.MAX_VALUE;
-    private Map<Vector2d, Animal> animals;
+    private static final int HEIGHT = Integer.MAX_VALUE;
+    private static final int WIDTH = Integer.MAX_VALUE;
     private Map<Vector2d, Grass> grasses;
-    private final MapVisualizer visualizer = new MapVisualizer(this);
+
 
     public GrassField(int numberOfGrasses){
         this.numberOfGrasses = numberOfGrasses;
@@ -28,8 +25,7 @@ public class GrassField implements WorldMap {
                 }
             }
         }
-    }   
-
+    }
     private boolean generateGrass(Random rand){
         Vector2d randomPosition = new Vector2d(rand.nextInt((int) Math.sqrt(numberOfGrasses*10)), rand.nextInt((int) Math.sqrt(numberOfGrasses*10)));
         if(this.isOccupied(randomPosition)){
@@ -41,64 +37,56 @@ public class GrassField implements WorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.precedes(this.getUpperRight()) && (this.getLowerLeft().precedes(position) && (!isOccupied(position) || !(objectAt(position) instanceof Animal)));
+        return super.canMoveTo(position) && (!isOccupied(position) || !(objectAt(position) instanceof Animal));
     }
 
-    @Override
-    public boolean place(Animal animal) {
-        if(canMoveTo(animal.getPosition())){
-            animals.put(animal.getPosition(), animal);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void move(Animal animal, MoveDirection direction) {
-        if(animals.containsKey(animal.getPosition())){
-            Vector2d oldPosition = animal.getPosition();
-            animal.move(direction, this);
-            Vector2d newPosition = animal.getPosition();
-            if (canMoveTo(newPosition)) {
-                animals.remove(oldPosition);
-                animals.put(newPosition, animal);
-            }
-        }
-    }
-
-    @Override
-    public boolean isOccupied(Vector2d position) {
-        return objectAt(position) != null;
-    }
 
     @Override
     public WorldElement objectAt(Vector2d position) {
-        if(animals.get(position) != null){
-            return animals.get(position);
+        if(super.objectAt(position) != null){
+            return super.objectAt(position);
         }
         return grasses.get(position);
     }
 
     public Vector2d getUpperRight(){
-        return new Vector2d(width, height);
+        return new Vector2d(WIDTH, HEIGHT);
     }
 
     public Vector2d getLowerLeft(){
-        return new Vector2d(-width, -height);
+        return new Vector2d(-WIDTH, -HEIGHT);
     }
 
-    @Override
-    public String toString(){
-        Vector2d lowerLeft = new Vector2d(width, height);
-        Vector2d upperRight = new Vector2d(-width, -height);
+
+    public Vector2d calculateLowerLeft(){
+        Vector2d lowerLeft = new Vector2d(WIDTH, HEIGHT);
         for(Grass grass : grasses.values()){
             lowerLeft = grass.getPosition().lowerLeft(lowerLeft);
-            upperRight = grass.getPosition().upperRight(upperRight);
         }
         for(Animal animal : animals.values()){
             lowerLeft = animal.getPosition().lowerLeft(lowerLeft);
+        }
+        return lowerLeft;
+    }
+
+    public Vector2d calculateUpperRight(){
+        Vector2d upperRight = new Vector2d(-WIDTH, -HEIGHT);
+        for(Grass grass : grasses.values()){
+            upperRight = grass.getPosition().upperRight(upperRight);
+        }
+        for(Animal animal : animals.values()){
             upperRight = animal.getPosition().upperRight(upperRight);
         }
-        return visualizer.draw(lowerLeft, upperRight);
+        return upperRight;
+    }
+
+    @Override
+    protected Vector2d getRightBound() {
+        return calculateUpperRight();
+    }
+
+    @Override
+    protected Vector2d getLeftBound() {
+        return calculateLowerLeft();
     }
 }
