@@ -1,14 +1,22 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.Comparator;
 import agh.ics.oop.MapVisualizer;
+import agh.ics.oop.PositionAlreadyOccupied;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
     protected final MapVisualizer visualizer = new MapVisualizer(this);
 
+    protected Comparator XComparator = new Comparator(true);
+
+    protected Comparator YComparator = new Comparator(false);
+    protected TreeSet<Vector2d> sortedX = new TreeSet<>(XComparator);
+    protected TreeSet<Vector2d> sortedY = new TreeSet<>(YComparator);
 
 
     @Override
@@ -18,12 +26,14 @@ public abstract class AbstractWorldMap implements WorldMap {
 
 
     @Override
-    public boolean place(Animal animal) {
+    public boolean place(Animal animal) throws PositionAlreadyOccupied {
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
+            addElements(animal.getPosition());
             return true;
+        } else {
+            throw new PositionAlreadyOccupied(animal.getPosition());
         }
-        return false;
     }
 
     @Override
@@ -41,10 +51,16 @@ public abstract class AbstractWorldMap implements WorldMap {
         }
     }
 
-    protected abstract void addElements(Vector2d element);
+    protected void addElements(Vector2d element){
+        sortedX.add(element);
+        sortedY.add(element);
+    }
 
 
-    protected abstract void removeElement(Vector2d element);
+    protected void removeElement(Vector2d element){
+        sortedY.remove(element);
+        sortedX.remove(element);
+    }
 
 
     @Override

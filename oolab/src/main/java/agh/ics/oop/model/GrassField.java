@@ -15,11 +15,7 @@ public class GrassField extends AbstractWorldMap {
     private static final int HEIGHT = Integer.MAX_VALUE;
     private static final int WIDTH = Integer.MAX_VALUE;
     private Map<Vector2d, Grass> grasses;
-    private Comparator XComparator = new Comparator(true);
 
-    private Comparator YComparator = new Comparator(false);
-    private TreeSet<Vector2d> sortedX = new TreeSet<>(XComparator);
-    private TreeSet<Vector2d> sortedY = new TreeSet<>(YComparator);
 
     public GrassField(int numberOfGrasses){
         this.numberOfGrasses = numberOfGrasses;
@@ -66,16 +62,6 @@ public class GrassField extends AbstractWorldMap {
         return new Vector2d(-WIDTH, -HEIGHT);
     }
 
-    public void addElements(Vector2d element){
-        sortedX.add(element);
-        sortedY.add(element);
-    }
-
-
-    public void removeElement(Vector2d element){
-        sortedY.remove(element);
-        sortedX.remove(element);
-    }
 
 
     public Vector2d calculateLowerLeft(){

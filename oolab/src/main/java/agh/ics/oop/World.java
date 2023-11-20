@@ -14,7 +14,7 @@ public class World {
 //        Simulation simulation = new Simulation(positions, directions, map);
 //        simulation.run();
         List<MoveDirection> directions = parse(args);
-        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(1,0), new Vector2d(2,0), new Vector2d(3,0));
+        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,0), new Vector2d(0,0), new Vector2d(1,0));
         WorldMap map = new GrassField(4);
         Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
