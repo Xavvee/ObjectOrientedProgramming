@@ -34,10 +34,18 @@ public abstract class AbstractWorldMap implements WorldMap {
             Vector2d newPosition = animal.getPosition();
             if (canMoveTo(newPosition)) {
                 animals.remove(oldPosition);
+                removeElement(oldPosition);
                 animals.put(newPosition, animal);
+                addElements(newPosition);
             }
         }
     }
+
+    protected abstract void addElements(Vector2d element);
+
+
+    protected abstract void removeElement(Vector2d element);
+
 
     @Override
     public boolean isOccupied(Vector2d position) {

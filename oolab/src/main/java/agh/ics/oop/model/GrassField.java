@@ -1,8 +1,12 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.Comparator;
+import com.sun.source.tree.Tree;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeSet;
 
 public class GrassField extends AbstractWorldMap {
 
@@ -11,7 +15,11 @@ public class GrassField extends AbstractWorldMap {
     private static final int HEIGHT = Integer.MAX_VALUE;
     private static final int WIDTH = Integer.MAX_VALUE;
     private Map<Vector2d, Grass> grasses;
+    private Comparator XComparator = new Comparator(true);
 
+    private Comparator YComparator = new Comparator(false);
+    private TreeSet<Vector2d> sortedX = new TreeSet<>(XComparator);
+    private TreeSet<Vector2d> sortedY = new TreeSet<>(YComparator);
 
     public GrassField(int numberOfGrasses){
         this.numberOfGrasses = numberOfGrasses;
@@ -32,6 +40,7 @@ public class GrassField extends AbstractWorldMap {
             return false;
         }
         grasses.put(randomPosition, new Grass(randomPosition));
+        addElements(randomPosition);
         return true;
     }
 
@@ -57,27 +66,24 @@ public class GrassField extends AbstractWorldMap {
         return new Vector2d(-WIDTH, -HEIGHT);
     }
 
+    public void addElements(Vector2d element){
+        sortedX.add(element);
+        sortedY.add(element);
+    }
+
+
+    public void removeElement(Vector2d element){
+        sortedY.remove(element);
+        sortedX.remove(element);
+    }
+
 
     public Vector2d calculateLowerLeft(){
-        Vector2d lowerLeft = new Vector2d(WIDTH, HEIGHT);
-        for(Grass grass : grasses.values()){
-            lowerLeft = grass.getPosition().lowerLeft(lowerLeft);
-        }
-        for(Animal animal : animals.values()){
-            lowerLeft = animal.getPosition().lowerLeft(lowerLeft);
-        }
-        return lowerLeft;
+        return new Vector2d(sortedX.first().getX(), sortedY.first().getY());
     }
 
     public Vector2d calculateUpperRight(){
-        Vector2d upperRight = new Vector2d(-WIDTH, -HEIGHT);
-        for(Grass grass : grasses.values()){
-            upperRight = grass.getPosition().upperRight(upperRight);
-        }
-        for(Animal animal : animals.values()){
-            upperRight = animal.getPosition().upperRight(upperRight);
-        }
-        return upperRight;
+        return new Vector2d(sortedX.last().getX(), sortedY.last().getY());
     }
 
     @Override

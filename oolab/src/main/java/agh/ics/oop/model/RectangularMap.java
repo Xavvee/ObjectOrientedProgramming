@@ -20,6 +20,16 @@ public class RectangularMap extends AbstractWorldMap {
         return super.canMoveTo(position) && !isOccupied(position);
     }
 
+    @Override
+    protected void addElements(Vector2d element) {
+
+    }
+
+    @Override
+    protected void removeElement(Vector2d element) {
+
+    }
+
 
     public Vector2d getLowerLeft(){
         return new Vector2d(0,0);
