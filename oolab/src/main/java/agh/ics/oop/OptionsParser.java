@@ -8,20 +8,15 @@ import java.util.List;
 import static agh.ics.oop.model.MoveDirection.*;
 
 public class OptionsParser {
-    public static List<MoveDirection> parse(String[] directions){
+    public static List<MoveDirection> parse(String[] directions) throws IllegalArgumentException{
         List<MoveDirection> directionList = new LinkedList<>();
-//        for (String direction : directions) {
-//            if (Objects.equals(direction, "f") || Objects.equals(direction, "r") || Objects.equals(direction, "b") || Objects.equals(direction, "l")) {
-//                directionList.add(MoveDirection.valueOf(direction));
-//            }
-//        }
         for (String direction : directions) {
             switch (direction){
                 case "f" -> directionList.add(FORWARD);
                 case "b" -> directionList.add(BACKWARD);
                 case "r" -> directionList.add(RIGHT);
                 case "l" -> directionList.add(LEFT);
-                default -> {}
+                default -> throw new IllegalArgumentException(direction + " is not legal move specification");
             }
         }
 
