@@ -1,12 +1,11 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.Comparator;
+import agh.ics.oop.ConsoleMapDisplay;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.PositionAlreadyOccupied;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 
 public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
@@ -17,7 +16,12 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected Comparator YComparator = new Comparator(false);
     protected TreeSet<Vector2d> sortedX = new TreeSet<>(XComparator);
     protected TreeSet<Vector2d> sortedY = new TreeSet<>(YComparator);
+    protected List<MapChangeListener> observers;
 
+    public AbstractWorldMap(){
+        this.observers = new ArrayList<>();
+        this.addObserver(new ConsoleMapDisplay());
+    }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -29,7 +33,8 @@ public abstract class AbstractWorldMap implements WorldMap {
     public boolean place(Animal animal) throws PositionAlreadyOccupied {
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
-            addElements(animal.getPosition());
+            addElement(animal.getPosition());
+            mapChanged(animal + " placed at: " + animal.getPosition());
             return true;
         } else {
             throw new PositionAlreadyOccupied(animal.getPosition());
@@ -46,12 +51,13 @@ public abstract class AbstractWorldMap implements WorldMap {
                 animals.remove(oldPosition);
                 removeElement(oldPosition);
                 animals.put(newPosition, animal);
-                addElements(newPosition);
+                addElement(newPosition);
+                mapChanged(animal + " " +  oldPosition + " -> " + newPosition);
             }
         }
     }
 
-    protected void addElements(Vector2d element){
+    protected void addElement(Vector2d element){
         sortedX.add(element);
         sortedY.add(element);
     }
@@ -80,17 +86,25 @@ public abstract class AbstractWorldMap implements WorldMap {
 
     @Override
     public Map<Vector2d, WorldElement> getElements() {
-        Map<Vector2d, WorldElement> allElements = new HashMap<>(animals);
-        return allElements;
+        return new HashMap<>(animals);
     }
 
+    protected void addObserver(MapChangeListener listener){
+        this.observers.add(listener);
+    }
+
+    protected void removeObserver(MapChangeListener listener){
+        this.observers.remove(listener);
+    }
+
+    protected void mapChanged(String message){
+        for( MapChangeListener observer : observers){
+            observer.mapChanged(this, message);
+        }
+    }
     public abstract Boundary getCurrentBounds();
-
-
 
     protected abstract Vector2d getUpperRight();
     protected abstract Vector2d getLowerLeft();
-
-
 
 }

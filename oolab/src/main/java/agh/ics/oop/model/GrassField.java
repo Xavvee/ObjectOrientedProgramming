@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.ConsoleMapDisplay;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -14,6 +16,7 @@ public class GrassField extends AbstractWorldMap {
 
 
     public GrassField(int numberOfGrasses){
+        super();
         this.numberOfGrasses = numberOfGrasses;
         this.grasses = new HashMap<>();
         this.animals = new HashMap<>();
@@ -32,7 +35,7 @@ public class GrassField extends AbstractWorldMap {
             return false;
         }
         grasses.put(randomPosition, new Grass(randomPosition));
-        addElements(randomPosition);
+        addElement(randomPosition);
         return true;
     }
 

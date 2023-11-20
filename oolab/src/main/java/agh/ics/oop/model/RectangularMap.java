@@ -1,6 +1,9 @@
 package agh.ics.oop.model;
 
 
+import agh.ics.oop.ConsoleMapDisplay;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -9,6 +12,7 @@ public class RectangularMap extends AbstractWorldMap {
     private final int width;
 
     public RectangularMap(int height, int width){
+        super();
         this.height = height;
         this.width = width;
         this.animals = new HashMap<>();
@@ -21,7 +25,7 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    protected void addElements(Vector2d element) {
+    protected void addElement(Vector2d element) {
 
     }
 
