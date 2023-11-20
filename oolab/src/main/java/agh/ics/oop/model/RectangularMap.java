@@ -39,14 +39,9 @@ public class RectangularMap extends AbstractWorldMap {
         return new Vector2d(width, height);
     }
 
-    @Override
-    protected Vector2d getLeftBound() {
-        return getLowerLeft();
-    }
 
     @Override
-    protected Vector2d getRightBound() {
-        return getUpperRight();
+    public Boundary getCurrentBounds() {
+        return new Boundary(getLowerLeft(), getUpperRight());
     }
-
 }

@@ -50,4 +50,9 @@ public interface WorldMap extends MoveValidator {
      * @return hashmap of all elements on map.
      */
     Map<Vector2d, WorldElement> getElements();
+
+    /**
+     * Return current boundaries of the map.
+     */
+    Boundary getCurrentBounds();
 }

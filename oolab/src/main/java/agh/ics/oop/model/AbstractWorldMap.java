@@ -75,7 +75,7 @@ public abstract class AbstractWorldMap implements WorldMap {
 
     @Override
     public String toString(){
-        return visualizer.draw(getLeftBound(),getRightBound());
+        return visualizer.draw(getCurrentBounds().lowerLeft(), getCurrentBounds().upperRight());
     }
 
     @Override
@@ -84,9 +84,9 @@ public abstract class AbstractWorldMap implements WorldMap {
         return allElements;
     }
 
-    protected abstract Vector2d getLeftBound();
+    public abstract Boundary getCurrentBounds();
 
-    protected abstract Vector2d getRightBound();
+
 
     protected abstract Vector2d getUpperRight();
     protected abstract Vector2d getLowerLeft();

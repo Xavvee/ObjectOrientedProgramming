@@ -1,12 +1,8 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.Comparator;
-import com.sun.source.tree.Tree;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeSet;
 
 public class GrassField extends AbstractWorldMap {
 
@@ -63,7 +59,6 @@ public class GrassField extends AbstractWorldMap {
     }
 
 
-
     public Vector2d calculateLowerLeft(){
         return new Vector2d(sortedX.first().getX(), sortedY.first().getY());
     }
@@ -73,20 +68,15 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
-    protected Vector2d getRightBound() {
-        return calculateUpperRight();
-    }
-
-    @Override
-    protected Vector2d getLeftBound() {
-        return calculateLowerLeft();
-    }
-
-    @Override
     public Map<Vector2d, WorldElement> getElements() {
         Map<Vector2d, WorldElement> allElements = new HashMap<>();
         allElements.putAll(super.getElements());
         allElements.putAll(this.grasses);
         return allElements;
+    }
+
+    @Override
+    public Boundary getCurrentBounds() {
+        return new Boundary(calculateLowerLeft(), calculateUpperRight());
     }
 }
