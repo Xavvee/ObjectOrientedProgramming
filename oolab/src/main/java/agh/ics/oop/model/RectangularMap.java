@@ -1,9 +1,6 @@
 package agh.ics.oop.model;
 
 
-import agh.ics.oop.ConsoleMapDisplay;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -34,7 +31,6 @@ public class RectangularMap extends AbstractWorldMap {
 
     }
 
-
     public Vector2d getLowerLeft(){
         return new Vector2d(0,0);
     }
@@ -42,7 +38,6 @@ public class RectangularMap extends AbstractWorldMap {
     public Vector2d getUpperRight(){
         return new Vector2d(width, height);
     }
-
 
     @Override
     public Boundary getCurrentBounds() {

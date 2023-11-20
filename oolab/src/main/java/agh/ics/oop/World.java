@@ -7,7 +7,7 @@ import java.util.List;
 import static agh.ics.oop.OptionsParser.parse;
 
 public class World {
-    public static void main(String[] args){
+    public static void main(String[] args) throws PositionAlreadyOccupied {
 //        List<MoveDirection> directions = parse(args);
 //        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(2,2));
 //        WorldMap map = new RectangularMap(4,4);
@@ -19,6 +19,7 @@ public class World {
         Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
     }
+
 
     static void run(MoveDirection[] directions){
         for (MoveDirection dir : directions) {

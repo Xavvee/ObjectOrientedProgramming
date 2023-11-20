@@ -38,8 +38,6 @@ public class Simulation {
         for( MoveDirection direction : moveDirections){
             int index = iter%numberOfAnimals;
             map.move( animals.get(index), direction);
-//            System.out.println("Zwierzę " + index + ": " + animals.get(index));
-//            System.out.println(map);
             iter++;
         }
     }

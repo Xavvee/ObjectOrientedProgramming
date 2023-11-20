@@ -1,7 +1,5 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.ConsoleMapDisplay;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;

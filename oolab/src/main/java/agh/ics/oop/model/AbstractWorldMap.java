@@ -1,7 +1,6 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.Comparator;
-import agh.ics.oop.ConsoleMapDisplay;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.PositionAlreadyOccupied;
 
