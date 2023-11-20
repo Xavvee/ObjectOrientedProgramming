@@ -15,7 +15,7 @@ public class SimulationTest {
     @Test
     public void testSimulationThreeAnimals(){
         //given
-        String[] args = {"f","l","r","f","g","f","p","f","r","t","f","f","t","f","f","t","f","f","t","l","l","l","f","l"};
+        String[] args = {"f","l","r","f","f","f","r","f","f","f","f","f","f","l","l","l","f","l"};
         MoveDirection[] moveArray = {FORWARD,LEFT,RIGHT,FORWARD,FORWARD,FORWARD,RIGHT,FORWARD,FORWARD,FORWARD,FORWARD,FORWARD,FORWARD,LEFT,LEFT,LEFT,FORWARD,LEFT};
         List<MoveDirection> result = Arrays.asList(moveArray);
 

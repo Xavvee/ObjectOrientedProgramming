@@ -6,9 +6,7 @@ import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.WorldMap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Simulation {
 
@@ -23,8 +21,12 @@ public class Simulation {
         List<Animal> animals = new ArrayList<>();
         for(Vector2d position : startingPositions){
             Animal animal = new Animal(position);
-            if(map.place(animal)) {
-                animals.add(animal);
+            try {
+                if(map.place(animal)) {
+                    animals.add(animal);
+                }
+            } catch (PositionAlreadyOccupied e) {
+                System.out.println("Position at " + position.toString() + " is already occupied. Animal placement skipped.");
             }
         }
         this.animals = animals;
@@ -36,8 +38,6 @@ public class Simulation {
         for( MoveDirection direction : moveDirections){
             int index = iter%numberOfAnimals;
             map.move( animals.get(index), direction);
-            System.out.println("Zwierzę " + index + ": " + animals.get(index));
-            System.out.println(map);
             iter++;
         }
     }

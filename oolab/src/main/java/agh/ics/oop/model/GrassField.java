@@ -1,12 +1,8 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.Comparator;
-import com.sun.source.tree.Tree;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeSet;
 
 public class GrassField extends AbstractWorldMap {
 
@@ -15,13 +11,10 @@ public class GrassField extends AbstractWorldMap {
     private static final int HEIGHT = Integer.MAX_VALUE;
     private static final int WIDTH = Integer.MAX_VALUE;
     private Map<Vector2d, Grass> grasses;
-    private Comparator XComparator = new Comparator(true);
 
-    private Comparator YComparator = new Comparator(false);
-    private TreeSet<Vector2d> sortedX = new TreeSet<>(XComparator);
-    private TreeSet<Vector2d> sortedY = new TreeSet<>(YComparator);
 
     public GrassField(int numberOfGrasses){
+        super();
         this.numberOfGrasses = numberOfGrasses;
         this.grasses = new HashMap<>();
         this.animals = new HashMap<>();
@@ -40,7 +33,7 @@ public class GrassField extends AbstractWorldMap {
             return false;
         }
         grasses.put(randomPosition, new Grass(randomPosition));
-        addElements(randomPosition);
+        addElement(randomPosition);
         return true;
     }
 
@@ -66,17 +59,6 @@ public class GrassField extends AbstractWorldMap {
         return new Vector2d(-WIDTH, -HEIGHT);
     }
 
-    public void addElements(Vector2d element){
-        sortedX.add(element);
-        sortedY.add(element);
-    }
-
-
-    public void removeElement(Vector2d element){
-        sortedY.remove(element);
-        sortedX.remove(element);
-    }
-
 
     public Vector2d calculateLowerLeft(){
         return new Vector2d(sortedX.first().getX(), sortedY.first().getY());
@@ -87,20 +69,15 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
-    protected Vector2d getRightBound() {
-        return calculateUpperRight();
-    }
-
-    @Override
-    protected Vector2d getLeftBound() {
-        return calculateLowerLeft();
-    }
-
-    @Override
     public Map<Vector2d, WorldElement> getElements() {
         Map<Vector2d, WorldElement> allElements = new HashMap<>();
         allElements.putAll(super.getElements());
         allElements.putAll(this.grasses);
         return allElements;
+    }
+
+    @Override
+    public Boundary getCurrentBounds() {
+        return new Boundary(calculateLowerLeft(), calculateUpperRight());
     }
 }

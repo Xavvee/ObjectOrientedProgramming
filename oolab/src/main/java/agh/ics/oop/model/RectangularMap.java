@@ -9,6 +9,7 @@ public class RectangularMap extends AbstractWorldMap {
     private final int width;
 
     public RectangularMap(int height, int width){
+        super();
         this.height = height;
         this.width = width;
         this.animals = new HashMap<>();
@@ -21,7 +22,7 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    protected void addElements(Vector2d element) {
+    protected void addElement(Vector2d element) {
 
     }
 
@@ -29,7 +30,6 @@ public class RectangularMap extends AbstractWorldMap {
     protected void removeElement(Vector2d element) {
 
     }
-
 
     public Vector2d getLowerLeft(){
         return new Vector2d(0,0);
@@ -40,13 +40,7 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    protected Vector2d getLeftBound() {
-        return getLowerLeft();
+    public Boundary getCurrentBounds() {
+        return new Boundary(getLowerLeft(), getUpperRight());
     }
-
-    @Override
-    protected Vector2d getRightBound() {
-        return getUpperRight();
-    }
-
 }
