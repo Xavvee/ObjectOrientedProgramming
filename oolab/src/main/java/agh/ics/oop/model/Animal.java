@@ -2,7 +2,7 @@ package agh.ics.oop.model;
 
 import java.util.Objects;
 
-public class Animal {
+public class Animal implements WorldElement {
 
     private final Vector2d lowerBound = new Vector2d(0,0);
     private final Vector2d upperBound = new Vector2d(4,4);
