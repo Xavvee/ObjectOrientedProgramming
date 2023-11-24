@@ -32,7 +32,7 @@ public class Simulation {
         this.animals = animals;
     }
 
-    public void run(){
+    public synchronized void run(){
         int numberOfAnimals = animals.size();
         int iter = 0;
         for( MoveDirection direction : moveDirections){

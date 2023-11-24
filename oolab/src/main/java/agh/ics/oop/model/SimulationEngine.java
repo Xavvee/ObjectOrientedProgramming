@@ -19,9 +19,13 @@ public class SimulationEngine {
         }
     }
 
-    public void runAsync(){
-        for(Simulation simulation : simulations){
-            Thread thread = new Thread(simulation::run);
+    public void runAsync() {
+        for (Simulation simulation : simulations) {
+            Thread thread = new Thread(() -> {
+                synchronized (simulation) {
+                    simulation.run();
+                }
+            });
             simulationThreads.add(thread);
             thread.start();
         }
@@ -32,4 +36,6 @@ public class SimulationEngine {
             simThread.join();
         }
     }
+
+    
 }

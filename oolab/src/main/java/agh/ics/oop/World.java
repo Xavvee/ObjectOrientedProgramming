@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static agh.ics.oop.OptionsParser.parse;
@@ -13,9 +14,16 @@ public class World {
         List<Vector2d> positions2 = List.of(new Vector2d(4,5), new Vector2d(1,5), new Vector2d(2,2), new Vector2d(5,0));
         WorldMap map1 = new GrassField(4);
         WorldMap map2 = new RectangularMap(10,10);
-        Simulation simulation1 = new Simulation(positions1, directions, map1);
-        Simulation simulation2 = new Simulation(positions2, directions, map2);
-        List<Simulation> simulations = List.of(simulation1, simulation2);
+
+        List<Simulation> simulations = new ArrayList<>();
+        for(int i = 0; i < 500; i++){
+            List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,2), new Vector2d(3,6), new Vector2d(1,0));
+            WorldMap map = new GrassField(4);
+            simulations.add(new Simulation(positions, directions, map));
+        }
+        List<Simulation> simulations1 = new ArrayList<>();
+        simulations1.add(new Simulation(positions1, directions, map1));
+        simulations1.add(new Simulation(positions2, directions, map2));
         SimulationEngine engine = new SimulationEngine(simulations);
 //        engine.runSync();
         engine.runAsync();
