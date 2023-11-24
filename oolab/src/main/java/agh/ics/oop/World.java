@@ -17,7 +17,14 @@ public class World {
         Simulation simulation2 = new Simulation(positions2, directions, map2);
         List<Simulation> simulations = List.of(simulation1, simulation2);
         SimulationEngine engine = new SimulationEngine(simulations);
-        engine.runSync();
+//        engine.runSync();
+        engine.runAsync();
+        try{
+            engine.awaitSimulationsEnd();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("System zakończył działanie.");
     }
 
 
