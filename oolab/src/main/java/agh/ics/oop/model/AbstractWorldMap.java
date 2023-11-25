@@ -31,7 +31,7 @@ public abstract class AbstractWorldMap implements WorldMap {
 
 
     @Override
-    public boolean place(Animal animal) throws PositionAlreadyOccupied {
+    public synchronized boolean place(Animal animal) throws PositionAlreadyOccupied {
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
             addElement(animal.getPosition());
@@ -43,7 +43,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
 
     @Override
-    public void move(Animal animal, MoveDirection direction) {
+    public synchronized void move(Animal animal, MoveDirection direction) {
         if(animals.containsKey(animal.getPosition())){
             Vector2d oldPosition = animal.getPosition();
             animal.move(direction, this);
@@ -54,7 +54,7 @@ public abstract class AbstractWorldMap implements WorldMap {
                 animals.put(newPosition, animal);
                 addElement(newPosition);
             }
-            mapChanged(animal + " " +  oldPosition + " -> " + newPosition);
+            mapChanged(animal + " " + oldPosition + " -> " + newPosition);
         }
     }
 
@@ -81,7 +81,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
 
     @Override
-    public String toString(){
+    public synchronized String toString(){
         return visualizer.draw(getCurrentBounds().lowerLeft(), getCurrentBounds().upperRight());
     }
 
@@ -103,7 +103,8 @@ public abstract class AbstractWorldMap implements WorldMap {
         this.observers.remove(listener);
     }
 
-    protected void mapChanged(String message){
+
+    protected synchronized void mapChanged(String message){
         for( MapChangeListener observer : observers){
             observer.mapChanged(this, message);
         }
