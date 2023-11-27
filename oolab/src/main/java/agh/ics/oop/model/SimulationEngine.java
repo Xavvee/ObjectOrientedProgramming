@@ -41,6 +41,9 @@ public class SimulationEngine {
                     System.err.println("ThreadPool did not terminate");
                 }
             }
+            for( Thread thread : simulationThreads){
+                thread.join();
+            }
         } catch (InterruptedException ex){
             threadPool.shutdownNow();
             Thread.currentThread().interrupt();
