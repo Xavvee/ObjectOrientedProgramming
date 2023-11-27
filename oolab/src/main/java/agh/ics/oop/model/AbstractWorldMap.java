@@ -3,6 +3,7 @@ package agh.ics.oop.model;
 import agh.ics.oop.Comparator;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.PositionAlreadyOccupied;
+import agh.ics.oop.presenter.SimulationPresenter;
 
 import java.util.*;
 
@@ -21,6 +22,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     public AbstractWorldMap(){
         this.observers = new ArrayList<>();
         this.addObserver(new ConsoleMapDisplay());
+        this.addObserver(new SimulationPresenter());
         this.id = UUID.randomUUID();
     }
 

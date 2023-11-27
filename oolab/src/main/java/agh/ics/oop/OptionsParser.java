@@ -8,7 +8,7 @@ import java.util.List;
 import static agh.ics.oop.model.MoveDirection.*;
 
 public class OptionsParser {
-    public static List<MoveDirection> parse(String[] directions) throws IllegalArgumentException{
+    public static List<MoveDirection> parse(List<String> directions) throws IllegalArgumentException{
         List<MoveDirection> directionList = new LinkedList<>();
         for (String direction : directions) {
             switch (direction){
