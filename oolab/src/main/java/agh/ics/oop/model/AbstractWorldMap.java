@@ -17,9 +17,11 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected TreeSet<Vector2d> sortedY = new TreeSet<>(YComparator);
     protected List<MapChangeListener> observers;
 
+    protected UUID id;
     public AbstractWorldMap(){
         this.observers = new ArrayList<>();
         this.addObserver(new ConsoleMapDisplay());
+        this.id = UUID.randomUUID();
     }
 
     @Override
@@ -51,8 +53,8 @@ public abstract class AbstractWorldMap implements WorldMap {
                 removeElement(oldPosition);
                 animals.put(newPosition, animal);
                 addElement(newPosition);
-                mapChanged(animal + " " +  oldPosition + " -> " + newPosition);
             }
+            mapChanged(animal + " " + oldPosition + " -> " + newPosition);
         }
     }
 
@@ -88,6 +90,11 @@ public abstract class AbstractWorldMap implements WorldMap {
         return new HashMap<>(animals);
     }
 
+    @Override
+    public UUID getId(){
+        return this.id;
+    }
+
     protected void addObserver(MapChangeListener listener){
         this.observers.add(listener);
     }
@@ -95,6 +102,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected void removeObserver(MapChangeListener listener){
         this.observers.remove(listener);
     }
+
 
     protected void mapChanged(String message){
         for( MapChangeListener observer : observers){
