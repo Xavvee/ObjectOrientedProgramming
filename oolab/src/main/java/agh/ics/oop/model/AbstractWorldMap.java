@@ -22,7 +22,6 @@ public abstract class AbstractWorldMap implements WorldMap {
     public AbstractWorldMap(){
         this.observers = new ArrayList<>();
         this.addObserver(new ConsoleMapDisplay());
-        this.addObserver(new SimulationPresenter());
         this.id = UUID.randomUUID();
     }
 
@@ -97,11 +96,11 @@ public abstract class AbstractWorldMap implements WorldMap {
         return this.id;
     }
 
-    protected void addObserver(MapChangeListener listener){
+    public void addObserver(MapChangeListener listener){
         this.observers.add(listener);
     }
 
-    protected void removeObserver(MapChangeListener listener){
+    public void removeObserver(MapChangeListener listener){
         this.observers.remove(listener);
     }
 

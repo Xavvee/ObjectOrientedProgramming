@@ -3,11 +3,12 @@ package agh.ics.oop.presenter;
 import agh.ics.oop.model.MapChangeListener;
 import agh.ics.oop.model.WorldMap;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
-import java.awt.*;
 
 public class SimulationPresenter implements MapChangeListener {
     private WorldMap map;
+
     @FXML
     private Label infoLabel;
 
@@ -16,12 +17,14 @@ public class SimulationPresenter implements MapChangeListener {
         this.map = map;
     }
 
-    public void drawMap(WorldMap map){
-        infoLabel.setText(map.toString());
+    public void drawMap(){
+        this.infoLabel.setText(map.toString());
     }
+
 
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
-        drawMap(worldMap);
+        drawMap();
     }
+
 }

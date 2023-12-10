@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static agh.ics.oop.OptionsParser.parse;
@@ -24,7 +23,9 @@ public class SimulationApp extends Application {
         configureStage(primaryStage, viewRoot);
         List<MoveDirection> directions = parse(getParameters().getRaw());
         List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,2), new Vector2d(3,6), new Vector2d(1,0));
-        WorldMap map = new GrassField(4);
+        GrassField map = new GrassField(4);
+        presenter.setWorldMap(map);
+        map.addObserver(presenter);
         Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
         primaryStage.show();
