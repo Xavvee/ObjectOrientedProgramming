@@ -39,6 +39,11 @@ public class Simulation {
             int index = iter%numberOfAnimals;
             map.move( animals.get(index), direction);
             iter++;
+            try {
+                Thread.sleep(500); // Pauza między ruchami
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
