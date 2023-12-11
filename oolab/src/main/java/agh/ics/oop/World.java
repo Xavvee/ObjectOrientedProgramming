@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import javafx.application.Application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import static agh.ics.oop.OptionsParser.parse;
 
 public class World {
     public static void main(String[] args){
-        List<MoveDirection> directions = parse(args);
+        List<MoveDirection> directions = parse(List.of(args));
         List<Vector2d> positions1 = List.of(new Vector2d(0,0), new Vector2d(0,2), new Vector2d(3,6), new Vector2d(1,0));
         List<Vector2d> positions2 = List.of(new Vector2d(4,5), new Vector2d(1,5), new Vector2d(2,2), new Vector2d(5,0));
         WorldMap map1 = new GrassField(4);

@@ -3,6 +3,7 @@ package agh.ics.oop.model;
 import agh.ics.oop.Comparator;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.PositionAlreadyOccupied;
+import agh.ics.oop.presenter.SimulationPresenter;
 
 import java.util.*;
 
@@ -95,11 +96,11 @@ public abstract class AbstractWorldMap implements WorldMap {
         return this.id;
     }
 
-    protected void addObserver(MapChangeListener listener){
+    public void addObserver(MapChangeListener listener){
         this.observers.add(listener);
     }
 
-    protected void removeObserver(MapChangeListener listener){
+    public void removeObserver(MapChangeListener listener){
         this.observers.remove(listener);
     }
 
